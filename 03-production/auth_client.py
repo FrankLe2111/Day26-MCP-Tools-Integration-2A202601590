@@ -18,7 +18,7 @@ import httpx
 from mcp import ClientSession
 from mcp.client.streamable_http import streamable_http_client
 
-SERVER_URL = "http://localhost:8000/mcp"
+SERVER_URL = "http://localhost:8001/mcp"
 TOKEN = "dev-token-abc123"
 
 
@@ -29,8 +29,9 @@ async def main() -> None:
 
     async with http_client:
         async with streamable_http_client(SERVER_URL, http_client=http_client) as (
-            read,
+            read
             write,
+            _,
         ):
             async with ClientSession(read, write) as session:
                 await session.initialize()
